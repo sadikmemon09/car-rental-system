@@ -448,9 +448,7 @@
             <th>Date & Time</th>
             <th>Hours</th>
             <th>Total Rent</th>
-            <th>Payment Status</th>
-            <th>Actions</th>
-            <th>Review</th>
+            
         </tr>
         {% for booking in bookings %}
         <tr>
@@ -458,21 +456,8 @@
             <td>{{ booking.datetime }}</td>
             <td>{{ booking.hours }}</td>
             <td>{{ booking.total_rent }}</td>
-            <td>
-                {% if booking.payment_status %}
-                Paid
-                {% else %}
-                Pending
-                {% endif %}
-            </td>
-            <td>
-                {% if not booking.payment_status %}
-                <form id="paymentForm{{ booking.id }}">
-                    <input type="hidden" id="bookingId{{ booking.id }}" name="booking_id" value="{{ booking.id }}">
-                    <button type="button" id="rzp-button1" data-booking-id="{{ booking.id }}">Pay Now</button>
-                </form>
-                {% endif %}
-            </td>
+            
+            
             <td>
                 {% if booking.payment_status %}
                 <form id="reviewForm{{ booking.id }}" class="reviewForm">
