@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Wheels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="website icon" type="png" href="../static/images/vecteezy_car-steering-wheel_13362604.png">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style2.css">
+
+    <style>
+        :root {
+            --carouse-transition-duration: 250ms;
+            --carouse-transition-ease: ease-out;
+            --carouse-bg-color-rgb: 0, 0, 0;
+            --carouse-shadow-color-rgb: 128, 128, 128;
+            --carouse-item-width: 11.5rem;
+            --carouse-item-height: 17.5rem;
+            --carouse-item-hover-effect: 1.075;
+            --carouse-item-reflection-blur: 0.25rem;
+            --carouse-item-empty-color-rgb: 255, 255, 255;
+            --carouse-item-glow-color-rgb: 255, 255, 255;
+            --carouse-item-glow-size: 5rem;
+            --carouse-diameter: 50rem;
+            --carouse-3d-perspective: 1000px;
+            --carouse-3d-perspective-origin: 50% 20%;
+            --carouse-control-button-width: 1.25rem;
+            --carouse-control-button-height: 4rem;
+            --carouse-control-color-rgb: 255, 255, 255;
+            --carouse-animation-duration: 25s;
+            --carouse-animation-play-state: running;
+            --carouse-direction-animation-play-state: paused;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        a {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: rgb(var(--carouse-bg-color-rgb));
+            overflow-x: hidden;
+            overflow-y: unset;
+            }
+
+
+        .carouse {
+            --_diameter: var(--carouse-diameter);
+            --_radius: calc(var(--_diameter) / 2);
+            --_item-width: var(--carouse-item-width);
+            --_item-height: var(--carouse-item-height);
+            perspective: var(--carouse-3d-perspective);
+            perspective-origin: var(--carouse-3d-perspective-origin);
+            width: var(--_diameter);
+            height: var(--_diameter);
+        }
+
+        @media only screen and (max-width: 48rem) {
+            .carouse {
+                --_diameter: calc(var(--carouse-diameter) * 0.75);
+                --_item-width: calc(var(--carouse-item-width) * 0.75);
+                --_item-height: calc(var(--carouse-item-height) * 0.75);
+            }
+        }
+
+        @media only screen and (max-width: 32rem) {
+            .carouse {
+                --_diameter: calc(var(--carouse-diameter) * 0.6);
+                --_item-width: calc(var(--carouse-item-width) * 0.6);
+                --_item-height: calc(var(--carouse-item-height) * 0.6);
+            }
+        }
+
+        @media only screen and (max-width: 16rem) {
+            .carouse {
+                --_diameter: calc(var(--carouse-diameter) * 0.25);
+                --_item-width: calc(var(--carouse-item-width) * 0.25);
+                --_item-height: calc(var(--carouse-item-height) * 0.25);
+            }
+        }
+
+        .carouse .carouse-control-button {
+            --_width: var(--carouse-control-button-width);
+            --_height: var(--carouse-control-button-height);
+            z-index: 1;
+            width: var(--_width);
+            height: var(--_height);
+            background-color: rgb(var(--carouse-control-color-rgb));
+            opacity: 0.2;
+            transition: opacity var(--carouse-transition-duration) var(--carouse-transition-ease);
+            position: absolute;
+        }
+
+        .carouse .carouse-control-button:hover {
+            opacity: 0.4;
+        }
+
+        .carouse .carouse-control-button:has(input:checked) {
+            opacity: 0.8;
+        }
+
+        .carouse .carouse-control-button input {
+            -webkit-appearance: none;
+            appearance: none;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .carouse .carouse-control-button.left {
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            top: calc(var(--_radius) - var(--_height) / 2);
+            left: 0;
+        }
+
+        .carouse:has(.carouse-control-button.left input:checked) {
+            --carouse-direction-animation-play-state: running;
+        }
+
+        .carouse .carouse-control-button.right {
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+            top: calc(var(--_radius) - var(--_height) / 2);
+            right: 0;
+        }
+
+        .carouse:has(.carouse-control-button.right input:checked) {
+            --carouse-direction-animation-play-state: paused;
+        }
+
+        .carouse .carouse-rotation-direction {
+            --_direction-animation-play-state: var(--carouse-direction-animation-play-state);
+            --_z: calc(var(--_radius) * -1);
+            transform: translateZ(var(--_z));
+            transform-style: preserve-3d;
+            animation: carouse-rotation-reverse calc(var(--carouse-animation-duration) / 2) reverse linear infinite var(--_direction-animation-play-state);
+            transition: all var(--carouse-transition-duration) var(--carouse-transition-ease);
+        }
+
+        @keyframes carouse-rotation-reverse {
+            from {
+                transform: translateZ(var(--_z)) rotateY(0deg);
+            }
+
+            to {
+                transform: translateZ(var(--_z)) rotateY(360deg);
+            }
+        }
+
+        @keyframes carouse-rotation-normal {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .carouse .carouse-item-wrapper {
+            transform-style: inherit;
+            width: inherit;
+            height: inherit;
+            list-style-type: none;
+            position: relative;
+            animation: carouse-rotation-normal var(--carouse-animation-duration) normal linear infinite var(--carouse-animation-play-state);
+            transition: all var(--carouse-transition-duration) var(--carouse-transition-ease);
+        }
+
+        .carouse .carouse-rotation-direction:has(.carouse-item:hover) {
+            --carouse-animation-play-state: paused;
+            --_direction-animation-play-state: paused;
+        }
+
+        .carouse .carouse-item {
+            --_width: var(--_item-width);
+            --_height: var(--_item-height);
+            --_rotation: calc(360 / var(--_num-elements) * var(--_index) * 1deg);
+            left: calc(var(--_radius) - var(--_item-width) / 2);
+            top: calc(var(--_radius) - var(--_item-height) / 2);
+            transform: rotateY(var(--_rotation)) translateZ(var(--_radius));
+            transform-style: inherit;
+            width: var(--_width);
+            height: var(--_height);
+            transition: all var(--carouse-transition-duration) var(--carouse-transition-ease);
+            box-shadow: 0 0 var(--carouse-item-glow-size) transparent;
+            position: absolute;
+        }
+
+        .carouse .carouse-item:hover {
+            box-shadow: 0 0 var(--carouse-item-glow-size) rgb(var(--carouse-item-glow-color-rgb));
+            transform: rotateY(var(--_rotation)) translateZ(calc(var(--_radius) * var(--carouse-item-hover-effect)));
+        }
+
+        .carouse .carouse-item a {
+            display: block;
+            width: inherit;
+            height: inherit;
+            text-indent: -9999px;
+            background-color: rgba(var(--carouse-item-empty-color-rgb), 0.5);
+            background-image: var(--_image-url);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            transition: filter var(--carouse-transition-duration) var(--carouse-transition-ease);
+        }
+
+
+        .carouse .carouse-item::before {
+            content: '';
+            width: inherit;
+            height: inherit;
+            background-color: rgba(var(--carouse-item-empty-color-rgb), 0.5);
+            background-image:
+                linear-gradient(to top, rgba(var(--carouse-bg-color-rgb), 0.25) 0%, rgba(var(--carouse-bg-color-rgb), 1.0) 75%),
+                var(--_image-url);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            pointer-events: none;
+            filter: blur(var(--carouse-item-reflection-blur));
+            transition: filter var(--carouse-transition-duration) var(--carouse-transition-ease);
+            transform-style: inherit;
+            transform-origin: center bottom;
+            transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg);
+            position: absolute;
+        }
+
+        .carouse .carouse-item:hover::before {
+            filter: blur(var(--carouse-item-reflection-blur));
+        }
+
+        .carouse .carouse-ground {
+            --_width: var(--_diameter);
+            --_height: var(--_diameter);
+            --_rotation: 90deg;
+            left: calc(var(--_radius) - var(--_width) / 2);
+            top: calc(var(--_radius) - var(--_height) / 2);
+            transform: rotateX(var(--_rotation)) translateZ(calc(var(--_item-height) / -2));
+            width: var(--_width);
+            height: var(--_height);
+            border-radius: 50%;
+            background: radial-gradient(rgba(var(--carouse-shadow-color-rgb), 0.75) 15%, rgba(var(--carouse-bg-color-rgb), 0) 60%);
+            opacity: 0.5;
+            transition: opacity var(--carouse-transition-duration) var(--carouse-transition-ease);
+            position: absolute;
+        }
+
+        .carouse .carouse-item-wrapper:has(.carouse-item:hover) .carouse-ground {
+            opacity: 0.75;
+        }
+
+        #nav{
+      color: white;
+    }
+
+    #login{
+      color: #5473b4;
+    }
+
+    .bookings-section {
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+
+    table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .star-rating {
+            display: flex;
+            direction: row-reverse;
+            font-size: 1.5em;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #bbb;
+            cursor: pointer;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #f2b600;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f2b600;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header style="background: transparent;" >
+        <a href="#" class="logo" style="text-decoration: none !important;"><img
+            src="../static/images/vecteezy_white-city-car-isolated-on-transparent-background-3d_29947346.png" alt=""><br>
+          <h6 style="background: linear-gradient(-45deg, #0051ff,#00d7c1,rgb(243, 45, 45));
+            background-clip: text;
+            color: black; -webkit-text-stroke: 3px transparent; display: flex;">Drive Wheels</h6>
+        </a>
+    
+        <div class="bx bx-menu" id="menu-icon"></div>
+    
+        <nav class="navbar navbar-expand-lg " id="navbr"
+          style="background-color: #eeeff1 !important; background: transparent !important;">
+          <div class="container-fluid">
+            <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav " style="gap:1.5rem !important;">
+                <li class="nav-item" id="navab">
+                <li><a class="nav-link active" id="nav" href="/home" >Home</a></li>
+                <li><a class="nav-link active" id="nav" href="/aboutus">About Us</a></li>
+                <li><a class="nav-link active" id="nav" href="/cars">Cars</a></li>
+                <li><a class="nav-link active" id="nav" href="/contact">contact</a></li>
+                <li><a class="nav-link active" id="nav" href="/mybookings">Mybooking</a></li>
+                </li>
+    
+              </ul>
+            </div>
+          </div>
+        </nav>
+    
+        <div class="header-btn" id="headbtn">
+          {% if request.user.is_authenticated %}
+          <a href="/signout"><button id="login"><span>Log Out</span></button></a>
+          {% else %}
+          <a href="/signin"><button id="login"><span>Log In</span></button></a>
+          {% endif %}
+        </div>
+      </header><br>
+      <section >
+      <div class="carouse">
+
+        <div class="carouse-control-button left"><input type="radio" name="carouse-control-input"></div>
+        <div class="carouse-control-button right"><input type="radio" name="carouse-control-input" checked></div>
+
+        <div class="carouse-rotation-direction">
+
+            <ul class="carouse-item-wrapper" style="--_num-elements: 11">
+
+                <li class="carouse-item"
+                    style="--_index: 1; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_6TVQ_5ooCAofOVzpAOk5FybFxf4M9wxCvw&s')">
+                    <a target="_blank">1</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 2; --_image-url: url('https://i.pinimg.com/originals/b2/af/d8/b2afd87b842fdbbe8bdba5f94ae6015f.jpg')">
+                    <a target="_blank">2</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 3; --_image-url: url('https://w0.peakpx.com/wallpaper/622/260/HD-wallpaper-ferrari-car-dark-clouds-background-red-car-sports-car.jpg')">
+                    <a target="_blank">3</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 4; --_image-url: url('https://images.unsplash.com/photo-1617335692042-7a3779b8e050?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1jbGFyZW58ZW58MHx8MHx8fDA%3D')">
+                    <a target="_blank">4</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 5; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO3Ta1YLdli5k1GLlPAyi-qCPyfFKN9YGFXg&s')">
+                    <a target="_blank">5</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 6; --_image-url: url('https://www.mordeo.org/files/uploads/2018/05/Mercedes-AMG-GT-C-Sports-Car-Sunset-HD-Mobile-Wallpaper-950x1689.jpg')">
+                    <a target="_blank">6</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 7; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QUsFdRypaRDiMtByWtN0UKX0IYGKuIbCyQ&s')">
+                    <a target="_blank">7</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 8; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8s73mp8cicH8C90H1rulpt8r7LyAVBuTNcQ&s')">
+                    <a target="_blank">8</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 9; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp8rAjP5-0wwwajeCZ3DytWbBTLNA9jzh3PA&s')">
+                    <a target="_blank">9</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 10; --_image-url: url('https://i.pinimg.com/736x/ff/db/fb/ffdbfbf06c7bd30a5f30f6ba0e601606.jpg')">
+                    <a target="_blank">10</a>
+                </li>
+                <li class="carouse-item"
+                    style="--_index: 11; --_image-url: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQusMcILWLX4sPvBSn8M0N7qHa7zrY-LIiv_Q&s')">
+                    <a target="_blank">11</a>
+                </li>
+                <audio src="../static/images/mixkit-fast-car-drive-by-1538.wav" autoplay ></audio>
+
+                <li class="carouse-ground"></li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</section><br>
+<section class="bookings-section mt-4" style="display: inline-block;position: absolute;top: 450px;">
+    <div class="row">
+    <h1>My Bookings</h1>
+
+    <table>
+        <tr>
+            <th>Car ID</th>
+            <th>Date & Time</th>
+            <th>Hours</th>
+            <th>Total Rent</th>
+            <th>Payment Status</th>
+            <th>Actions</th>
+            <th>Review</th>
+        </tr>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.car_id }}</td>
+            <td>{{ booking.datetime }}</td>
+            <td>{{ booking.hours }}</td>
+            <td>{{ booking.total_rent }}</td>
+            <td>
+                {% if booking.payment_status %}
+                Paid
+                {% else %}
+                Pending
+                {% endif %}
+            </td>
+            <td>
+                {% if not booking.payment_status %}
+                <form id="paymentForm{{ booking.id }}">
+                    <input type="hidden" id="bookingId{{ booking.id }}" name="booking_id" value="{{ booking.id }}">
+                    <button type="button" id="rzp-button1" data-booking-id="{{ booking.id }}">Pay Now</button>
+                </form>
+                {% endif %}
+            </td>
+            <td>
+                {% if booking.payment_status %}
+                <form id="reviewForm{{ booking.id }}" class="reviewForm">
+                    <div class="star-rating">
+                        <input type="radio" name="rating{{ booking.id }}" id="5-stars-{{ booking.id }}" value="5" />
+                        <label for="5-stars-{{ booking.id }}" class="star">&#9733;</label>
+                        <input type="radio" name="rating{{ booking.id }}" id="4-stars-{{ booking.id }}" value="4" />
+                        <label for="4-stars-{{ booking.id }}" class="star">&#9733;</label>
+                        <input type="radio" name="rating{{ booking.id }}" id="3-stars-{{ booking.id }}" value="3" />
+                        <label for="3-stars-{{ booking.id }}" class="star">&#9733;</label>
+                        <input type="radio" name="rating{{ booking.id }}" id="2-stars-{{ booking.id }}" value="2" />
+                        <label for="2-stars-{{ booking.id }}" class="star">&#9733;</label>
+                        <input type="radio" name="rating{{ booking.id }}" id="1-stars-{{ booking.id }}" value="1" />
+                        <label for="1-stars-{{ booking.id }}" class="star">&#9733;</label>
+                    </div>
+                    <button type="button" class="submitReviewButton" data-booking-id="{{ booking.id }}">Submit Review</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</section>
+<script>
+        document.getElementById('rzp-button1').onclick = function(e) {
+            var options = {
+                "key": "{{ razorpay_merchant_key }}",
+                "amount": "{{ amount }}",
+                "currency": "INR",
+                "name": "Drive Wheels",
+                "description": "Payment for Booking #{{ booking.id }}",
+                "order_id": "{{ razorpay_order_id }}",
+                "handler": function (response){
+                    document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                    document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                    document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                    document.getElementById('payment-form').submit();
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+
+
+
+</body>
+
+</html>

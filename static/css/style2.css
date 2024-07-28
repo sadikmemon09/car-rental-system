@@ -1,0 +1,469 @@
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .90em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 20px;
+}
+
+/* .steeringlogo{
+    -webkit-transform: rotate(360deg);
+    -webkit-transition-duration: 5s;
+    -webkit-transition-delay: now;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+} */
+
+/* #steeringlogo{
+    height: 70px;width: 60px;position: relative; bottom: 5px; left: 55px;
+} */
+
+@media screen and (max-width:500px){
+    .logo, .col-2,.FT, .TM, .sort, .seat{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:800px){
+    .logo,.col-2,.FT, .TM, .sort, .seat {
+        width: 80%;
+    }
+}
+@media screen and (max-device-width:1020px){
+    #super-footer{
+        width: 100%;
+        height: 100%;
+        position: absolute !important;
+        top: 1250px !important;
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    #jumboheading,#jumbohead,#headbtn,#navbr{
+        width: 100%;
+        padding: 20px;
+        
+    }
+}
+
+
+
+@media screen and (max-device-width:1020px){
+    .t{
+
+    font-size: 11px;
+    text-align-last: justify;
+    position: relative;
+    right: 80px;
+    bottom: 90px;
+    height: 400px;
+    width: 170px;  
+    }
+}
+@media screen and (max-device-width:1020px){
+    .cust img{
+
+    position: relative;
+    left: 70px;
+    bottom: 500px; 
+    width: 200px;
+    height: 550px;
+    }
+}
+@media screen and (max-device-width:1020px){
+    .mb-4{
+
+    font-size: 15px;
+
+    position: relative;
+    right: 70px;
+    bottom: 90px; 
+    }
+}
+@media screen and (max-device-width:1020px){
+    #custbtn a{
+
+    font-size: 8px;
+    position: relative;
+    right: 20px;
+    bottom: 25px; 
+    width: 50%;
+    height: 10px;
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    #custbtn a{
+
+    font-size: 10px;
+    text-align: center;
+    position: relative;
+    right: 20px;
+    bottom: 30px; 
+    
+    }
+}
+@media screen and (max-device-width:1020px){
+    .subheading{
+
+    font-size: 10px;
+    position: relative;
+    right: 70px; 
+    bottom: 90px;
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    #cd{
+        position: relative;
+        width: 90%;
+        height: 20% !important;
+    
+        
+    }
+}
+
+@media screen and (min-width: 1200px) {
+  .host-counter-container {
+    max-width: 1140px;
+
+    gap: 7px;}}
+
+@media screen and (max-device-width:1020px){
+    #rev{
+        position: relative;
+        right: 30px;
+    
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    #cdtxt,#cdtitle{
+        font-size: 10px;
+        position: relative;
+        bottom:40px;
+    
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    #cb a{
+        font-size: 8px;
+        position: relative;
+        bottom:45px;
+    
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .customer{
+        height: 100%;    
+        width: 60%;
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .host{
+        height: 100%;    
+        width: 40%;
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .hostele .host-counter-container{
+        font-size: 5px;    
+        padding: 0;
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .hostele h3{
+        font-size: 10px;    
+        padding: 0;
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .cont{
+      
+        position: relative;
+        left: 70px;
+        width: 70%  !important;
+   
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .contact-form{
+      
+        position: relative;
+        right: 100px;
+        top: 100px;
+        width: 500px !important;
+        height: 450px;
+ 
+   
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .contact-form input{
+      
+        
+        width: 100%  !important;
+        height: 5px;
+   
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .customer{
+        height: 100%;    
+        width: 60%;
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .host{
+        height: 10%;    
+        width: 100%;
+        position: absolute;
+        top: 520px;
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .hostele h3{
+        font-size: 10px;    
+        padding: 0;
+        
+    }
+}
+@media screen and (max-width: 1020px) {
+  .host-counter-container {
+    width: 11px;
+      font-size: 10px;    
+        padding: 0;
+     }}
+@media screen and (max-width: 1020px) {
+  .hostele {
+    margin: 4px;
+    position: relative;
+    top: 10px;
+    right:40px;
+   
+      
+}}
+@media screen and (max-device-width:1020px){
+    .form-container{
+      
+        position: absolute;
+        top: 1200px;
+        left: 40px;
+        width: 100%  !important;
+   
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .step{
+      
+        position: absolute;
+        width: 100%  !important;
+        height: 630px;
+   
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .host-share-earn-steps-title{
+        
+       font-size: 12px;
+       position: relative;
+        right: 160px;
+        
+            
+        
+   
+        
+    }
+}
+
+
+@media screen and (max-device-width:1020px){
+    .host-share-earn-steps-blocks-block{
+      
+        
+        position: relative;
+        font-size: 10px;
+        float: none !important;
+        margin:0;
+        bottom: 280px;
+        left: 30px;
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .host-share-earn-steps-blocks-block-image-container {
+      
+        
+        position: relative;
+        height: 70px;
+        width: 50px;
+        justify-content: space-around;
+        float: right;
+        bottom:200px;
+        margin: 0
+        
+        
+        
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .host-share-earn-steps-blocks-block-image-container img{
+      
+        
+        position: relative;
+        height: 60px;
+        width: 50px;
+        
+        
+       
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .host-share-earn-steps-blocks-block-content-title p{
+      
+        
+        position: relative;
+        margin: 0;
+        float: right;
+        left: 80px;
+        top: 10px
+            
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    #titletwo {
+      
+        
+        position: relative;
+        margin: 0;
+        float: right;
+        left: 25px;
+        top: 10px
+            
+        
+    }
+}
+
+
+@media screen and (max-device-width:1020px){
+    .text span{
+      
+        
+        font-size:20px;
+        position: relative;
+        
+            
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .text h1{
+        font-size:20px;
+        position: absolute;
+        bottom: 100px;
+        left:20px;
+            
+        
+    }
+}
+
+
+@media screen and (max-device-width:1020px){
+    .home{
+        font-size:20px;
+        position: relative;
+        bottom: 675px;
+        
+            
+        
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .appstore img {
+        
+        height: 15px;
+        width: 40px;
+        
+            
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .appstore{
+        position: absolute;
+        bottom:90px; 
+        left: 30px;
+        
+  
+    }
+}
+
+
+@media screen and (max-device-width:1020px){
+    .card-body{
+        width: 60% !important;;
+        padding:0;
+        margin-top: 5%;
+        margin-left: 20%
+            
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .col-md-2{
+        width: 75% !important;;
+        padding:30px;
+        margin-top: 5%;
+        margin-left: 13% !important;;
+            
+        
+    }
+}
+@media screen and (max-device-width:1020px){
+    .logo{
+     width: 45%;
+           
+    }
+}
+@media screen and (max-device-width:1020px){
+    #navbr{
+     width: 70%;
+           
+    }
+}
+
+@media screen and (max-device-width:1020px){
+    .bookings-section{
+     width:600px;
+     margin-left: 50px; 
+     height: 100vh;
+             
+    }
+}

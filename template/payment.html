@@ -1,0 +1,7 @@
+<form id="payment-form" method="POST" action="/paymenthandler">
+    {% csrf_token %}
+    <input  name="razorpay_payment_id" id="razorpay_payment_id">
+    <input  name="razorpay_order_id" id="razorpay_order_id">
+    <input  name="razorpay_signature" id="razorpay_signature">
+    <input type="submit" value="submit">
+</form>

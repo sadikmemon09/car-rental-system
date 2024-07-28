@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Review Form</title>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.review-form-container {
+    background-color: #cab0b0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.review-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.review-form input[type="text"],
+.review-form input[type="email"],
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.rating {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    font-size: 20px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #f39c12;
+}
+
+.review-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.review-form button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="review-form-container">
+        {% include "messages.html" %}
+        <h2>Leave a Review</h2>
+        <form action="" method="POST" class="review-form">
+            {% csrf_token %}
+            <label for="images" >upload image</label>
+            <input type="file" name="image">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="rating">Rating</label>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5" title="5 stars">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" title="4 stars">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" title="3 stars">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" title="2 stars">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" title="1 star">1 stars</label>
+            </div>
+            
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment" rows="4" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
